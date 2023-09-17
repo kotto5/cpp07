@@ -6,7 +6,7 @@
 
 #define MAX_VAL 750
 
-int main(int, char**)
+int pdfTest()
 {
     Array<int> numbers(MAX_VAL);
     int* mirror = new int[MAX_VAL];
@@ -31,6 +31,7 @@ int main(int, char**)
             return 1;
         }
     }
+    std::cout << "same value check OK" << std::endl;
     try
     {
         numbers[-2] = 0;
@@ -54,4 +55,63 @@ int main(int, char**)
     }
     delete [] mirror;
     return 0;
+}
+
+int main()
+{
+    std::cout << "============ test int ==============" << std::endl;
+    Array<int> intArray(5);
+    for (unsigned int i = 0; i < intArray.size(); i++)
+    {
+        intArray[i] = i;
+        std::cout << intArray[i] << std::endl;
+    }
+    std::cout << std::endl << std::endl << std::endl;
+
+    std::cout << "============ test string ==============" << std::endl;
+    Array<std::string> strArray(5);
+    for (unsigned int i = 0; i < strArray.size(); i++)
+    {
+        strArray[i] = std::to_string(i);
+        std::cout << strArray[i] << std::endl;
+    }
+    std::cout << std::endl << std::endl << std::endl;
+
+    std::cout << "============ test copy ==============" << std::endl;
+    Array<std::string> strArray2(strArray);
+    for (unsigned int i = 0; i < strArray2.size(); i++)
+    {
+        std::cout << strArray2[i] << std::endl;
+    }
+    std::cout << std::endl << std::endl << std::endl;
+
+    std::cout << "============ test assign ==============" << std::endl;
+    Array<std::string> strArray3 = strArray;
+    for (unsigned int i = 0; i < strArray3.size(); i++)
+    {
+        std::cout << strArray3[i] << std::endl;
+    }
+    std::cout << std::endl << std::endl << std::endl;
+
+    std::cout << "============ test exception ==============" << std::endl;
+    try
+    {
+        std::cout << strArray3[10] << std::endl;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    std::cout << std::endl << std::endl << std::endl;
+
+    std::cout << "============ test pdf ==============" << std::endl;
+    pdfTest();
+    std::cout << std::endl << std::endl << std::endl;
+
+    std::cout << "============ test empty ==============" << std::endl;
+    Array<std::string> strArray4;
+    std::cout << strArray4.size() << std::endl;
+    std::cout << std::endl << std::endl << std::endl;
+
+    return (0);
 }
