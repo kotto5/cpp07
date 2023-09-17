@@ -33,22 +33,72 @@ int Test(const char *a, const char *b)
     return (0);
 }
 
-template <typename T>
-void swap(T &a, T &b)
+bool    printResultMsg(bool success, std::string msg)
 {
-    std::cout << T::value_type << std::endl;
-    std::cout << "a = " << a << ", b = " << b << std::endl;
-    T tmp = a;
-    a = b;
-    b = tmp;
+    if (success)
+    {
+        std::cout << msg << ": OK ✅" << std::endl;
+        return (true);
+    }
+    else
+    {
+        std::cout << msg << ": NG ❌" << std::endl;
+        return (false);
+    }
+}
+
+template <typename T>
+int test(T a, T b, std::string type)
+{
+    std::cout << "============ " << type << " ==============" << std::endl;
+    std::cout << "a: " << a << ", b: " << b << std::endl;
+    T min;
+    if (a < b)
+        min = a;
+    else
+        min = b;
+
+    T max;
+    if (a > b)
+        max = a;
+    else
+        max = b;
+
+    std::cout << "min: " << min << ", max: " << max << std::endl;
+    printResultMsg(::min(a, b) == min, "min");
+    printResultMsg(::max(a, b) == max, "max");
+
+    T origin_a = a;
+    T origin_b = b;
+    ::swap(a, b);
+    printResultMsg(a == origin_b && b == origin_a, "swap");
+    return (0);
+}
+
+int doTest()
+{
+    test(1, 2, "int");
+    test(1.0, 2.0, "double");
+    test('a', 'b', "char");
+    test("abc", "def", "string");
+    test("def", "abc", "string");
+    test(4.2f, 8.4f, "float");
+    test(4.2l, 8.4l, "long double");
+
+    // std::string a = "abc";
+    // std::string b = "def";
+    // test(a, b, "string");
+    // std::cout << (a < b) << std::endl;
+    // std::cout << ("abc" < "def") << std::endl;
+    // std::cout << ("def" < "abc") << std::endl;
+
+    std::cout << "============ pdf test ==============" << std::endl;
+    pdfTest();
+    return (0);
 }
 
 int main()
 {
-    pdfTest();
-    std::string a = "AAA";
-    std::string b = "ZZZ";
-    Test(a.c_str(), b.c_str());
-
+    doTest();
     return (0);
 }
