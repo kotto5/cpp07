@@ -6,18 +6,24 @@
 #endif
 
 template <typename T>
-Array<T>::Array() : _array(NULL), _size(0) {}
+Array<T>::Array() : _array(NULL), _size(0) {
+    std::cout << "Array() called size:" << _size << std::endl;
+}
 
 template <typename T>
-Array<T>::Array(unsigned int n) : _array(new T[n]), _size(n) {}
+Array<T>::Array(unsigned int n) : _array(new T[n]), _size(n) {
+    std::cout << "Array() called size:" << _size << std::endl;
+}
 
 template <typename T>
 Array<T>::Array(Array const & src) : _array(NULL), _size(0) {
     *this = src;
+    std::cout << "Array(copy) called size:" << _size << std::endl;
 }
 
 template <typename T>
 Array<T>::~Array() {
+    std::cout << "~Array() called size:" << _size << std::endl;
     delete [] _array;
 }
 
