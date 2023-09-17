@@ -85,13 +85,6 @@ int doTest()
     test(4.2f, 8.4f, "float");
     test(4.2l, 8.4l, "long double");
 
-    // std::string a = "abc";
-    // std::string b = "def";
-    // test(a, b, "string");
-    // std::cout << (a < b) << std::endl;
-    // std::cout << ("abc" < "def") << std::endl;
-    // std::cout << ("def" < "abc") << std::endl;
-
     std::cout << "============ pdf test ==============" << std::endl;
     pdfTest();
     return (0);
@@ -102,3 +95,10 @@ int main()
     doTest();
     return (0);
 }
+
+    // std::string a = "abc";
+    // std::string b = "def";
+    // test(a, b, "string");
+    // std::cout << (a < b) << std::endl;
+    // std::cout << ("abc" < "def") << std::endl;
+    // std::cout << ("def" < "abc") << std::endl;
