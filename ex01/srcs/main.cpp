@@ -32,8 +32,18 @@ void    testConstArray()
     // itr(&array[0], size, mult); // error: invalid conversion from ‘const int*’ to ‘int*’ [-fpermissive]
 }
 
+void    testNull()
+{
+    int const array[] = {0, 1, 2};
+    std::size_t size = 3;
+    void    (*func)(const int *);
+    func = NULL;
+    itr(&array[0], size, func);
+}
+
 int main()
 {
     testNormalArray();
     testConstArray();
+    testNull();
 }

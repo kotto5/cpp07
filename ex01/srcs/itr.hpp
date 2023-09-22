@@ -2,6 +2,7 @@
 #define ITR_HPP
 
 #include <iostream>
+#include <exception>
 
 template <typename T>
 void printPtr(T* ptr)
@@ -22,6 +23,8 @@ void itr(T* arr, std::size_t size, void (*f)(T*))
 template <typename T>
 void itr(const T* arr, std::size_t size, void (*f)(const T*))
 {
+    if (arr == NULL || f == NULL)
+        throw std::exception();
     for (std::size_t i = 0; i < size; i++)
     { 
         f(&arr[i]);
