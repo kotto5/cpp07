@@ -5,15 +5,12 @@
 #include <exception>
 
 template <typename T>
-void printPtr(T* ptr)
-{
-    std::cout << ptr << " is ptr" << std::endl;
-}
-
-
-template <typename T>
 void itr(T* arr, std::size_t size, void (*f)(T*))
 {
+    if (arr == NULL)
+        throw std::runtime_error("arr is NULL");
+    if (f == NULL)
+        throw std::runtime_error("func pointer is NULL");
     for (std::size_t i = 0; i < size; i++)
     { 
         f(&arr[i]);
@@ -23,10 +20,12 @@ void itr(T* arr, std::size_t size, void (*f)(T*))
 template <typename T>
 void itr(const T* arr, std::size_t size, void (*f)(const T*))
 {
-    if (arr == NULL || f == NULL)
-        throw std::exception();
+    if (arr == NULL)
+        throw std::runtime_error("arr is NULL");
+    if (f == NULL)
+        throw std::runtime_error("func pointer is NULL");
     for (std::size_t i = 0; i < size; i++)
-    { 
+    {
         f(&arr[i]);
     }
 }
