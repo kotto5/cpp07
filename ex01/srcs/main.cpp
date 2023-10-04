@@ -1,5 +1,10 @@
 #include "itr.hpp"
 
+template <typename T>
+void printPtr(T* ptr)
+{
+    std::cout << ptr << " is ptr" << std::endl;
+}
 
 void    mult(int *a)
 {
@@ -28,17 +33,30 @@ void    testConstArray()
     std::cout << "===== testConstArray ====" << std::endl;
     int const array[] = {0, 1, 2};
     std::size_t size = 3;
-    itr(&array[0], size, printer);
+    try {
+        itr(&array[0], size, printer);
+    }
+    catch (std::exception &e)
+    {
+        std::cout << "printer() throws exception" << std::endl;
+    }
     // itr(&array[0], size, mult); // error: invalid conversion from ‘const int*’ to ‘int*’ [-fpermissive]
 }
 
 void    testNull()
 {
+    std::cout << "===== test NULL ====" << std::endl;
     int const array[] = {0, 1, 2};
     std::size_t size = 3;
     void    (*func)(const int *);
     func = NULL;
-    itr(&array[0], size, func);
+    try {
+        itr(&array[0], size - 1, func);
+    }
+    catch (std::exception &e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
 }
 
 int main()
