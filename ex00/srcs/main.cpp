@@ -1,6 +1,23 @@
 #include "whatever.hpp"
 #include <iostream>
 
+class NoCopyConstructor
+{
+    NoCopyConstructor(const NoCopyConstructor &other);
+public:
+    int a;
+    NoCopyConstructor(int a = 0);
+    NoCopyConstructor &operator=(const NoCopyConstructor &other);
+    bool	operator<(const NoCopyConstructor &other) const ;
+    bool	operator>(const NoCopyConstructor &other) const ;
+    bool	operator==(const NoCopyConstructor &other) const ;
+    bool	operator!=(const NoCopyConstructor &other) const ;
+    bool	operator<=(const NoCopyConstructor &other) const ;
+    bool	operator>=(const NoCopyConstructor &other) const ;
+    ~NoCopyConstructor();
+};
+std::ostream &operator<<(std::ostream &os, const NoCopyConstructor &other);
+
 int pdfTest()
 {
     int a = 2;
@@ -84,7 +101,7 @@ int doTest()
     test("def", "abc", "string");
     test(4.2f, 8.4f, "float");
     test(4.2l, 8.4l, "long double");
-
+	::min(NoCopyConstructor(100), NoCopyConstructor(200));
     std::cout << "============ pdf test ==============" << std::endl;
     pdfTest();
     return (0);
@@ -102,3 +119,40 @@ int main()
     // std::cout << (a < b) << std::endl;
     // std::cout << ("abc" < "def") << std::endl;
     // std::cout << ("def" < "abc") << std::endl;
+
+NoCopyConstructor::NoCopyConstructor(int a): a(a) {}
+
+NoCopyConstructor::~NoCopyConstructor() {}
+
+NoCopyConstructor &NoCopyConstructor::operator=(const NoCopyConstructor &other)
+{
+    this->a = other.a;
+    return (*this);
+}
+
+NoCopyConstructor::NoCopyConstructor(const NoCopyConstructor &other)
+{ this->a = other.a; }
+
+bool	NoCopyConstructor::operator<(const NoCopyConstructor &other) const 
+{ return (this->a < other.a); }
+
+bool	NoCopyConstructor::operator>(const NoCopyConstructor &other) const 
+{ return (this->a > other.a); }
+
+bool	NoCopyConstructor::operator==(const NoCopyConstructor &other) const 
+{ return (this->a == other.a); }
+
+bool	NoCopyConstructor::operator!=(const NoCopyConstructor &other) const 
+{ return !(*this == other); }
+
+bool	NoCopyConstructor::operator<=(const NoCopyConstructor &other) const 
+{ return !(*this > other); }
+
+bool	NoCopyConstructor::operator>=(const NoCopyConstructor &other) const 
+{ return !(*this < other); }
+
+std::ostream &operator<<(std::ostream &os, const NoCopyConstructor &other)
+{
+	os << other.a;
+	return (os);
+}
