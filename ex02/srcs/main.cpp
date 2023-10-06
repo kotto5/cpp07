@@ -10,7 +10,8 @@ class A
 {
 private:
 public:
-    A() = default;
+    // A() = default;
+    A();
     A(const A& src);
     A& operator=(const A& rhs);
     ~A();
