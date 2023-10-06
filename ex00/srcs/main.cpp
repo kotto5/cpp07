@@ -102,6 +102,7 @@ int doTest()
     test(4.2f, 8.4f, "float");
     test(4.2l, 8.4l, "long double");
 	::min(NoCopyConstructor(100), NoCopyConstructor(200));
+	::max<const NoCopyConstructor>(NoCopyConstructor(100), NoCopyConstructor(200));
     std::cout << "============ pdf test ==============" << std::endl;
     pdfTest();
     return (0);
