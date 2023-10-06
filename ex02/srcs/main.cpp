@@ -6,6 +6,41 @@
 
 #define MAX_VAL 750
 
+class A
+{
+private:
+public:
+    A() = default;
+    A(const A& src);
+    A& operator=(const A& rhs);
+    ~A();
+};
+
+A::A()
+{ std::cout << "A() called" << std::endl; }
+
+A::A(const A& src)
+{ std::cout << "A(copy) called" << std::endl; 
+    *this = src;
+}
+
+A& A::operator=(const A& rhs)
+{
+    (void   )rhs;
+    std::cout << "A= called" << std::endl;
+    return *this;
+}
+
+A::~A()
+{}
+
+std::ostream& operator<<(std::ostream& out, const A& a)
+{
+    (void   )a;
+    out << "A";
+    return out;
+}
+
 int pdfTest()
 {
     Array<int> numbers(MAX_VAL);
@@ -135,6 +170,17 @@ void    testDefaultConstructor()
     std::cout << std::endl << std::endl << std::endl;
 }
 
+void    testDefaultConstructor2()
+{
+    std::cout << "============ test default constructor 222 ==============" << std::endl;
+    Array<A> AArray(3);
+    for (unsigned int i = 0; i < AArray.size(); i++)
+    {
+        std::cout << AArray[i] << std::endl;
+    }
+    std::cout << std::endl << std::endl << std::endl;
+}
+
 int main()
 {
     testInt();
@@ -142,6 +188,7 @@ int main()
     testCopy();
     testException();
     testDefaultConstructor();
+    testDefaultConstructor2();
     std::cout << "============ test pdf ==============" << std::endl;
     pdfTest();
     std::cout << std::endl << std::endl << std::endl;
