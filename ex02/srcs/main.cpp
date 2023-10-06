@@ -122,12 +122,26 @@ void    testEmpty()
     std::cout << std::endl << std::endl << std::endl;
 }
 
+#include <sstream>
+
+void    testDefaultConstructor()
+{
+    std::cout << "============ test default constructor ==============" << std::endl;
+    Array<int> intArray(3);
+    for (unsigned int i = 0; i < intArray.size(); i++)
+    {
+        std::cout << intArray[i] << std::endl;
+    }
+    std::cout << std::endl << std::endl << std::endl;
+}
+
 int main()
 {
     testInt();
     testString();
     testCopy();
     testException();
+    testDefaultConstructor();
     std::cout << "============ test pdf ==============" << std::endl;
     pdfTest();
     std::cout << std::endl << std::endl << std::endl;
