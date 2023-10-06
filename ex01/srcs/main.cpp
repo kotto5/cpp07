@@ -1,4 +1,4 @@
-#include "itr.hpp"
+#include "iter.hpp"
 
 template <typename T>
 void printPtr(T* ptr)
@@ -22,9 +22,9 @@ void    testNormalArray()
     std::cout << "===== testNormalArray ====" << std::endl;
     int array[] = {0, 1, 2};
     std::size_t size = 3;
-    itr(&array[0], size, printer);
-    itr(&array[0], size, mult);
-    itr(&array[0], size, printer);
+    iter(&array[0], size, printer);
+    iter(&array[0], size, mult);
+    iter(&array[0], size, printer);
     std::cout << std::endl << std::endl << std::endl;
 }
 
@@ -34,13 +34,13 @@ void    testConstArray()
     int const array[] = {0, 1, 2};
     std::size_t size = 3;
     try {
-        itr(&array[0], size, printer);
+        iter(&array[0], size, printer);
     }
     catch (std::exception &e)
     {
         std::cout << "printer() throws exception" << std::endl;
     }
-    // itr(&array[0], size, mult); // error: invalid conversion from ‘const int*’ to ‘int*’ [-fpermissive]
+    // iter(&array[0], size, mult); // error: invalid conversion from ‘const int*’ to ‘int*’ [-fpermissive]
 }
 
 void    testNull()
@@ -51,7 +51,7 @@ void    testNull()
     void    (*func)(const int *);
     func = NULL;
     try {
-        itr(&array[0], size - 1, func);
+        iter(&array[0], size - 1, func);
     }
     catch (std::exception &e)
     {

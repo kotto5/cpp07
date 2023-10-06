@@ -1,11 +1,11 @@
-#ifndef ITR_HPP
-#define ITR_HPP
+#ifndef ITER_HPP
+#define ITER_HPP
 
 #include <iostream>
 #include <exception>
 
 template <typename T>
-void itr(T* arr, std::size_t size, void (*f)(T*))
+void iter(T* arr, std::size_t size, void (*f)(T*))
 {
     if (arr == NULL)
         throw std::runtime_error("arr is NULL");
@@ -18,7 +18,7 @@ void itr(T* arr, std::size_t size, void (*f)(T*))
 }
 
 template <typename T>
-void itr(const T* arr, std::size_t size, void (*f)(const T*))
+void iter(const T* arr, std::size_t size, void (*f)(const T*))
 {
     if (arr == NULL)
         throw std::runtime_error("arr is NULL");
