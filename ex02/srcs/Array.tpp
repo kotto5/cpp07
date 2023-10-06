@@ -11,7 +11,7 @@ Array<T>::Array() : _array(NULL), _size(0) {
 }
 
 template <typename T>
-Array<T>::Array(unsigned int n) : _array(new T[n]), _size(n) {
+Array<T>::Array(unsigned int n) : _array(new T[n]()), _size(n) {
     std::cout << "Array() called size:" << _size << std::endl;
 }
 
@@ -31,7 +31,7 @@ template <typename T>
 Array<T> &Array<T>::operator=(Array const & rhs) {
     if (this != &rhs) {
         delete [] _array;
-        _array = new T[rhs._size];
+        _array = new T[rhs._size]();
         _size = rhs._size;
         for (unsigned int i = 0; i < _size; i++) {
             _array[i] = rhs._array[i];
