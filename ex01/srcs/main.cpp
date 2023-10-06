@@ -1,20 +1,20 @@
 #include "iter.hpp"
 
 template <typename T>
-void printPtr(T* ptr)
+void printPtr(T& ptr)
 {
     std::cout << ptr << " is ptr" << std::endl;
 }
 
-void    mult(int *a)
+void    mult(int &a)
 {
-    std::cout << "mult() called: " << *a << " --> " << *a * 2 << std::endl;
-    (*a) *= 2;
+    std::cout << "mult() called: " << a << " --> " << a * 2 << std::endl;
+    (a) *= 2;
 }
 
-void    printer(int const *a)
+void    printer(int const &a)
 {
-    std::cout << "printer() called: "<< *a << std::endl;
+    std::cout << "printer() called: "<< a << std::endl;
 }
 
 void    testNormalArray()
@@ -48,7 +48,7 @@ void    testNull()
     std::cout << "===== test NULL ====" << std::endl;
     int const array[] = {0, 1, 2};
     std::size_t size = 3;
-    void    (*func)(const int *);
+    void    (*func)(const int &);
     func = NULL;
     try {
         iter(&array[0], size - 1, func);

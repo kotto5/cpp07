@@ -5,7 +5,7 @@
 #include <exception>
 
 template <typename T>
-void iter(T* arr, std::size_t size, void (*f)(T*))
+void iter(T* arr, std::size_t size, void (*f)(T&))
 {
     if (arr == NULL)
         throw std::runtime_error("arr is NULL");
@@ -13,12 +13,12 @@ void iter(T* arr, std::size_t size, void (*f)(T*))
         throw std::runtime_error("func pointer is NULL");
     for (std::size_t i = 0; i < size; i++)
     { 
-        f(&arr[i]);
+        f(arr[i]);
     }
 }
 
 template <typename T>
-void iter(const T* arr, std::size_t size, void (*f)(const T*))
+void iter(const T* arr, std::size_t size, void (*f)(const T&))
 {
     if (arr == NULL)
         throw std::runtime_error("arr is NULL");
@@ -26,7 +26,7 @@ void iter(const T* arr, std::size_t size, void (*f)(const T*))
         throw std::runtime_error("func pointer is NULL");
     for (std::size_t i = 0; i < size; i++)
     {
-        f(&arr[i]);
+        f(arr[i]);
     }
 }
 
